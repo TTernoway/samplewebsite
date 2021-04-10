@@ -1,30 +1,19 @@
-// server.js
-// where your node app starts
-
-// we've started you off with Express (https://expressjs.com/)
-// but feel free to use whatever libraries or frameworks you'd like through `package.json`.
-const express = require("express");
+const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
+const port = 4000;
 
-// our default array of dreams
-const dreams = [
+app.use(bodyParser.urlencoded({ extended: false }));
 
-];
+// Set up home route
+app.get('/', (req, res) => {
+  res.send("This is the homepage");
+})
+// Set up second page
+app.get('/portfolio', (req, res) => {
+  res.send("This is the second page");
+})
 
-// make all the files in 'public' available
-// https://expressjs.com/en/starter/static-files.html
-app.use(express.static("public"));
-
-// https://expressjs.com/en/starter/basic-routing.html
-app.get("/", (request, response) => {
-  response.sendFile(__dirname + "/views/index.html");
-});
-
-app.get("/aboutme", (request, response) => {
-  response.sendFile(__dirname + "/views/aboutme.html");
-});
-
-
-const listener = app.listen(process.env.PORT, () => {
-  console.log("Your app is listening on port " + listener.address().port);
+app.listen(port, () => {
+  console.log(`Success! Your application is running on port ${port}.`);
 });
